@@ -1,4 +1,22 @@
-#!/usr/bin/python2
+#!/usr/bin/python
+# _*_ coding: utf-8 -*-
+
+import sqlite3
+import sys
+import re
+
+try:
+	con = sqlite3.connect('shad.db')
+	cur = con.cursor()
+
+except sqlite3.Error as e:
+	print ("Error %s:" % e.args[0])
+	sys.exit(1)
+
+def showChapter(chapter):
+	cur.execute('SELECT desc FROM areaDescription WHERE ID = %d' % chapter)
+	chaptext = str(cur.fetchone())
+	print (chaptext)
 
 class character:
 	def __init__(self, name):
@@ -16,12 +34,14 @@ class character:
 	def printrace(self):
 		return str(self.race)
 
+mychar = character(input('Enter a name for your character: '))
+mychar.setrace(input('Enter your race: ')) 
 
-class characterMove:
-	pass
+print('Welcome ' + mychar.printname() + ' the ' + mychar.printrace() + '.....')
+print('....welcome to the Evil Wood')
+print()
+showChapter(1)
+print()
 
-mychar = character(raw_input('Enter a name for your character: '))
-mychar.setrace(raw_input('Enter your race: ')) 
-print 'Welcome ' + mychar.printname() + ' the ' + mychar.printrace() + '.....'
-print '....welcome to the Evil Wood'
 
+con.close()
