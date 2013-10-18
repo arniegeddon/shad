@@ -8,21 +8,20 @@ class character:
 		self.name = name
 
 	def printname(self):
-		print(self.name)
+		return str(self.name)
 
 	def setrace(self, race):
 		self.race = race
 
 	def printrace(self):
-		return self.race
-#		print(self.race)
+		return str(self.race)
 
 
 class characterMove:
 	pass
 
 mychar = character(raw_input('Enter a name for your character: '))
-mychar.setrace(raw_input('Entr your race: '))
-
-print 'Welcome ' 
+mychar.setrace(raw_input('Enter your race: ')) 
+print 'Welcome ' + mychar.printname() + ' the ' + mychar.printrace() + '.....'
+print '....welcome to the Evil Wood'
 
