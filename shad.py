@@ -4,6 +4,7 @@
 import sqlite3
 import sys
 import re
+import curses
 
 try:
 	con = sqlite3.connect('shad.db')
@@ -34,14 +35,35 @@ class character:
 	def printrace(self):
 		return str(self.race)
 
-mychar = character(input('Enter a name for your character: '))
-mychar.setrace(input('Enter your race: ')) 
+def curseRaceMenu():
+x = 0
+while x != ord(str(listRace[-1])):
+	screen = curses.initscr()
+	screen.clear()
+	screen.border(0)
+	screen.addstr(2,2, "Please choose a race..")
+	screen.addstr(4,4,  listRace[1])
+	screen.addstr(5,4,  listRace[2])
+	screen.addstr(6,4,  listRace[3])
+	screen.addstr(7,4,  listRace[4])
+	screen.refresh()
+
+	curses.endwin()
+
+
+listRace = [ ]
+listRace= ['EmptyRace', 'Human', 'Elf', 'Dwarf', 'Mutant']
+
+"""
+# mychar = character(input('Enter a name for your character: '))
+# mychar.setrace(input('Enter your race: '))
 
 print('Welcome ' + mychar.printname() + ' the ' + mychar.printrace() + '.....')
 print('....welcome to the Evil Wood')
 print()
 showChapter(1)
 print()
+"""
 
 
 con.close()
